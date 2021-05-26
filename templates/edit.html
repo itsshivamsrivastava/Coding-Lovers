@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block body %}
+
+	<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="page-heading">
+                            <h1>Admin Panel</h1>
+                            <span class="subheading">Manage your posts and change them</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+
+                    <h1>Basic Actions</h1>
+
+                        <a href="/dashboard"><button class="btn btn-primary">Dashboard Home</button></a>
+                        <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+                        <hr>
+
+                    <h1>Add/Edit Post</h1>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                              {% for category, message in messages %}
+                                 <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                              {% endfor %}
+                            {% endif %}
+                    {% endwith %}
+                	
+                    <form id="contactForm" name="sentMessage" action="/edit/{{sno}}" method="post" novalidate enctype="multipart/form-data">
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Tittle</label>
+                                <input class="form-control" id="tittle" type="text" placeholder="Tittle" name="tittle" required data-validation-required-message="Please enter your tittle." value="{{post.tittle}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Tagline</label>
+                                <input class="form-control" id="tline" type="text" placeholder="Tagline" name="tline" required data-validation-required-message="Please enter your tagline." value="{{post.tagline}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Slug</label>
+                                <input class="form-control" id="slug" name="slug" type="text" placeholder="Slug" required data-validation-required-message="Please enter your Slug." value="{{post.slug}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <!-- margin-right: -152px; margin-left: -152px; -->
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Content</label>
+                                <!-- <textarea id="content" name="content"></textarea> -->
+                                <textarea class="form-control" id="content" name="content" rows="5" placeholder="Enter your content" required data-validation-required-message="Please enter a content.">{{post.content}}</textarea>
+
+                                <!-- <textarea class="form-control" id="content" name="content" rows="5" placeholder="Enter your content" required data-validation-required-message="Please enter a content.">{{post.content}}</textarea> -->
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <!--name="file1"-->
+                        <input type="file" name="file1" id="file1"/>
+<!--                    <button class="btn btn-outline-primary" type="submit">Submit</button>-->
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Image File</label>
+                                <input class="form-control" id="img_file" name="img_file" placeholder="Upload an image" value="{{post.img_file}}"/>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <div id="success"></div>
+                        <button class="btn btn-outline-primary" id="sendMessageButton" type="submit">Submit</button>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#content').summernote();
+            });
+        </script>
+
+        {% endblock %}

@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+{% block body %}
+
+	<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="page-heading">
+                            <h1>Admin Panel</h1>
+                            <span class="subheading">Manage your posts and change them</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+
+                    <h1>Basic Actions</h1>
+
+                        <a href="/bookDashboard"><button class="btn btn-primary">Dashboard Home</button></a>
+                        <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+                        <hr>
+
+                    <h1>Add/Edit Book</h1>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                              {% for category, message in messages %}
+                                 <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                              {% endfor %}
+                            {% endif %}
+                    {% endwith %}
+                	
+                    <form id="contactForm" name="sentMessage" action="/bookEdit/{{book_id}}" method="post" novalidate enctype="multipart/form-data">
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Book Name</label>
+                                <input class="form-control" id="name" type="text" placeholder="Book Name" name="name" required data-validation-required-message="Please enter your book name." value="{{book.book_name}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Book Category</label>
+                                <input class="form-control" id="category" type="text" placeholder="Book Category" name="category" required data-validation-required-message="Please enter your book category." value="{{book.book_cat}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Book Author</label>
+                                <input class="form-control" id="author" name="author" type="text" placeholder="Book Author" required data-validation-required-message="Please enter book author." value="{{book.book_author}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Book Publication</label>
+                                <input class="form-control" id="publication" name="publication" type="text" placeholder="Book Publication" required data-validation-required-message="Please enter the book publication." value="{{book.book_publication}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- margin-right: -152px; margin-left: -152px; -->
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Book Description</label>
+                                <!-- <textarea id="content" name="content"></textarea> -->
+                                <textarea class="form-control" id="desc" name="desc" rows="5" placeholder="Book Description" required data-validation-required-message="Please enter the book description.">{{book.book_desc}}</textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                         
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Amazon Link</label>
+                                <input class="form-control" id="amazonLink" name="amazonLink" type="text" placeholder="Amazon Link" required data-validation-required-message="Please enter the book link." value="{{book.amazon_link}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Flipkart Link</label>
+                                <input class="form-control" id="flipkartLink" name="flipkartLink" type="text" placeholder="Flipkart Link" required data-validation-required-message="Please enter the book link." value="{{book.flipkart_link}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Thriftbooks Link</label>
+                                <input class="form-control" id="thriftbooksLink" name="thriftbooksLink" type="text" placeholder="thriftbookshriftbooks Link" required data-validation-required-message="Please enter the book link." value="{{book.thriftbooks_link}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Book Price</label>
+                                <input class="form-control" id="bookprice" name="bookprice" type="text" placeholder="Book Price" required data-validation-required-message="Please enter the book price." value="{{book.price}}" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <input type="file" name="file2" id="file2"/>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Book Image File</label>
+                                <input class="form-control" id="bookImage" name="bookImage" placeholder="Upload a book image" value="{{book.book_img}}"/>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <div id="success"></div>
+                        <button class="btn btn-outline-primary" id="sendMessageButton" type="submit">Submit</button>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#desc').summernote();
+            });
+        </script>
+
+        {% endblock %}

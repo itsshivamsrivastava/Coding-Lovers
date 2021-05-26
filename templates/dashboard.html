@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block body %}
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+	<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="page-heading">
+                            <h1>Admin Panel</h1>
+                            <span class="subheading">Manage your posts and change them</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+
+                    <h1>Basic Actions</h1>
+
+                        <a href="/edit/0"><button class="btn btn-outline-primary buttonStyle">Add a new post</button></a>
+                        <a href="/bookEdit/0"><button class="btn btn-outline-primary buttonStyle">Add a new Book</button></a>
+                        <a href="/bookDashboard"><button class="btn btn-outline-primary buttonStyle">Book Dashboard</button></a>
+                        <a href="/logout"><button class="btn btn-outline-primary buttonStyle">Logout</button></a>
+                        <hr>
+<!--                    <h1>Upload a file</h1>-->
+
+<!--                        <form action="/uploader" method="post" enctype="multipart/form-data">-->
+<!--                            -->
+<!--                            <input type="file" name="file1">-->
+<!--                            <button class="btn btn-outline-primary" type="submit">Submit</button>-->
+
+<!--                        </form>-->
+                    <br>
+                    <h1>Edit Posts</h1> <br>
+
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                              {% for category, message in messages %}
+                                 <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                              {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+
+                	<table class="table">
+                        <thead>
+                          <tr>
+                            <th>SNo.</th>
+                            <th>Tittle</th>
+                            <th>Date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for post in posts %}
+                              <tr>
+                                <td>{{post.sno}}</td>
+                                <td>{{post.tittle}}</td>
+                                <td>{{post.date}}</td>
+                                <td><a href="/edit/{{post.sno}}"><button class="btn btn-outline-primary buttonStyle">Edit</button></a></td>
+                                <td><a href="/delete/{{post.sno}}"><button class="btn btn-outline-primary buttonStyle">Delete</button></a></td>
+                              </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        {% endblock %}

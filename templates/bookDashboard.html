@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block body %}
+
+	<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="page-heading">
+                            <h1>Admin Panel</h1>
+                            <span class="subheading">Manage your posts and change them</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+
+                    <h1>Basic Actions</h1>
+
+                        <a href="/edit/0"><button class="btn btn-outline-primary">Add a new post</button></a>
+                        <a href="/bookEdit/0"><button class="btn btn-outline-primary">Add a new Book</button></a>
+                        <a href="/logout"><button class="btn btn-outline-primary">Logout</button></a>
+                        <hr>
+<!--                    <h1>Upload a file</h1>-->
+
+<!--                        <form action="/uploader" method="post" enctype="multipart/form-data">-->
+<!--                            -->
+<!--                            <input type="file" name="file1">-->
+<!--                            <button class="btn btn-outline-primary" type="submit">Submit</button>-->
+
+<!--                        </form>-->
+                    <br>
+                    <h1>Edit Books</h1> <br>
+
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                              {% for category, message in messages %}
+                                 <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                              {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+
+                	<table class="table">
+                        <thead>
+                          <tr>
+                            <th>Book Id.</th>
+                            <th>Book Name</th>
+                            <th>Book Category</th>
+                            <th>Book Author</th>
+                            <th>Book Publication</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for book in books %}
+                              <tr>
+                                  <td>{{book.book_id}}</td>
+                                  <td>{{book.book_name}}</td>
+                                  <td>{{book.book_cat}}</td>
+                                  <td>{{book.book_author}}</td>
+                                  <td>{{book.book_publication}}</td>
+                                  <td><a href="/bookEdit/{{book.book_id}}"><button class="btn btn-outline-primary">Edit</button></a></td>
+                                  <td><a href="/bookDelete/{{book.book_id}}"><button class="btn btn-outline-primary">Delete</button></a></td>
+
+
+                              </tr>
+                              
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        {% endblock %}

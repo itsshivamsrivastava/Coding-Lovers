@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block body %}
+
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/about-bg.jpg') }}')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="page-heading">
+                            <h1>About Me</h1>
+                            <span class="subheading">{{params['about_tagline']}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>{{params['about_text']}}
+
+                        <h2>What is {{params['blog_name']}}?</h2>
+                        <p>W3Schools is a school for web developers, covering all the aspects of web development:
+                        <ul class="w3-ul">
+                        <li><a href="/html/default.asp">HTML Tutorial</a></li>
+                        <li><a href="/css/default.asp">CSS Tutorial</a></li>
+                        <li><a href="/js/default.asp">JavaScript Tutorial</a></li>
+                        <li><a href="/php/default.asp">PHP Tutorial</a></li>
+                        <li><a href="/sql/default.asp">SQL Tutorial</a></li>
+                        <li><a href="/python/default.asp">Python Tutorial</a></li>
+                        <li><a href="/java/default.asp">Java Tutorial</a></li>
+                        <li><a href="/cpp/default.asp">C++ Tutorial</a></li>
+                        <li><a href="/cs/default.asp">C# Tutorial</a></li>
+                        <li><a href="/r/default.asp">R Tutorial</a></li>
+                        <li><a href="/bootstrap/bootstrap_ver.asp">Bootstrap Tutorial</a></li>
+                        <li><a href="/jquery/default.asp">jQuery Tutorial</a></li>
+                        <li><a href="/react/default.asp">React Tutorial</a></li>
+                        <li><a href="/xml/default.asp">XML Tutorial</a></li>
+                        <li><a href="/w3css/default.asp">W3.CSS Tutorial</a></li>
+                        <li><a href="/default.asp">And Much More ...</a> 
+                        </ul>
+                        <hr>
+                        <h2>Easy Learning</h2>
+                        W3Schools has focus on simplicity.
+
+                        W3Schools practice easy learning.
+
+                        W3Schools uses simple code examples and simple illustrations of how to use it.
+
+                        W3Schools' tutorials start from basic level and move all the way up to professional references.
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

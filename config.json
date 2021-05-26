@@ -1,0 +1,26 @@
+{
+  "params":
+  {
+    "local_server": "True",
+    "local_uri": "mysql://root:@localhost/codinglovers",
+    "prod_uri": "mysql://root:@localhost/codinglovers",
+    "fb_url": "https://www.facebook.com/codingLovers14",
+    "tw_url": "https://www.twitter.com/codinglovers",
+    "gh_url": "https://www.github.com/codinglovers",
+    "blog_name": "Coding Lovers",
+    "tag_line": "Heaven for Programmers",
+    "gmail-user": "example@email.com",
+    "gmail-password": "your-password",
+    "about_tagline": "Coding Lovers website is for programmers as well as beginners.",
+    "about_text": "The Largest Web Developer Site on the Internet. Three Billion Pages Displayed Each Year. Sixty Million Visitors Every Month.",
+    "no_of_posts": 3,
+    "login_image": "login.svg",
+    "admin_user": "admin",
+    "admin_password": "admin",
+    "upload_location": "C:\\Users\\Dell\\PycharmProjects\\Python-flask\\static\\assets\\img",
+    "book_upload_location": "C:\\Users\\Dell\\PycharmProjects\\Python-flask\\static\\assets\\bookImg",
+    "book_cat": "Java Programming Books"
+  }
+
+
+}
