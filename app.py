@@ -311,5 +311,5 @@ def searchBook():
     return render_template('bookshelf.html', params=params, books=searchResult)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True)
 
