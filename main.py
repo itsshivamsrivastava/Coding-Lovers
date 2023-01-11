@@ -18,13 +18,20 @@ app = Flask(__name__)
 app.secret_key = 'super-secret-key'
 app.config['UPLOAD_FOLDER'] = params['upload_location']
 app.config['BOOK_UPLOAD_FOLDER'] = params['book_upload_location']
-app.config.update(
-    MAIL_SERVER='smtp.gmail.com',
-    MAIL_PORT=465,
-    MAIL_USE_SSL=True,
-    MAIL_USERNAME=params['gmail-user'],
-    MAIL_PASSWORD=params['gmail-password']
-)
+# app.config.update(
+#     MAIL_SERVER='smtp.gmail.com',
+#     MAIL_PORT=465,
+#     MAIL_USE_SSL=True,
+#     MAIL_USERNAME=params['gmail-user'],
+#     MAIL_PASSWORD=params['gmail-password']
+# )
+
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = '0b712f2fabdc86'
+app.config['MAIL_PASSWORD'] = '3f19c452ca373f'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
 if local_server:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
@@ -238,15 +245,6 @@ def bookEdit(book_id):
                 return redirect('/bookEdit/' + str(book_id))
         book = Book.query.filter_by(book_id=book_id).first()
         return render_template('bookEdit.html', params=params, book=book, book_id=book_id)
-
-
-# @app.route("/uploader", methods=['GET', 'POST'])
-# def uploader():
-#     if 'user' in session and session['user'] == params['admin_user']:
-#         if request.method == 'POST':
-#             f = request.files['file1']
-#             f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
-#             return "Uploaded Successfully"
 
 @app.route("/logout")
 def logout():
